@@ -1,4 +1,4 @@
-package pl.mateuszkoczan.petclinic.map;
+package pl.mateuszkoczan.petclinic.service.map;
 
 import org.springframework.stereotype.Service;
 import pl.mateuszkoczan.petclinic.model.Owner;
