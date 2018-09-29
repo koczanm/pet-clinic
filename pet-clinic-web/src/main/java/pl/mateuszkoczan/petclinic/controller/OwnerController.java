@@ -14,11 +14,17 @@ public class OwnerController {
         this.ownerService = ownerService;
     }
 
-    @GetMapping("/owners")
+    @GetMapping({"/owners", "/owners.html"})
     public String showOwners(Model model) {
 
         model.addAttribute("owners", ownerService.findAll());
 
         return "owners/index";
+    }
+
+    @GetMapping({"/owners/find", "owners/find.html"})
+    public String findOwners() {
+
+        return "notimpl";
     }
 }
