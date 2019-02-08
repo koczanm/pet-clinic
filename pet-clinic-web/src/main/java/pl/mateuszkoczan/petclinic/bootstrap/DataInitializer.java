@@ -3,10 +3,7 @@ package pl.mateuszkoczan.petclinic.bootstrap;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import pl.mateuszkoczan.petclinic.model.*;
-import pl.mateuszkoczan.petclinic.service.OwnerService;
-import pl.mateuszkoczan.petclinic.service.PetTypeService;
-import pl.mateuszkoczan.petclinic.service.SpecialtyService;
-import pl.mateuszkoczan.petclinic.service.VetService;
+import pl.mateuszkoczan.petclinic.service.*;
 
 import java.time.LocalDate;
 
@@ -17,13 +14,16 @@ public class DataInitializer implements CommandLineRunner {
     private final PetTypeService petTypeService;
     private final SpecialtyService specialtyService;
     private final VetService vetService;
+    private final VisitService visitService;
 
     public DataInitializer(OwnerService ownerService, PetTypeService petTypeService,
-                           SpecialtyService specialtyService, VetService vetService) {
+                           SpecialtyService specialtyService, VetService vetService,
+                           VisitService visitService) {
         this.ownerService = ownerService;
         this.petTypeService = petTypeService;
         this.specialtyService = specialtyService;
         this.vetService = vetService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -81,6 +81,15 @@ public class DataInitializer implements CommandLineRunner {
         owner2.getPets().add(fionasCat);
 
         System.out.println("Loaded Pets");
+
+        Visit visit1 = new Visit();
+        visit1.setDate(LocalDate.now());
+        visit1.setDescription("Sneezy Kitty");
+        visit1.setPet(fionasCat);
+
+        visitService.save(visit1);
+
+        System.out.println("Loaded Visits");
 
         Specialty radiology = new Specialty();
         radiology.setDescription("Radiology");
